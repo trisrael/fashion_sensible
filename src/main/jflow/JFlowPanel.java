@@ -24,6 +24,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Timer;
@@ -36,6 +37,7 @@ import event.ShapeEvent;
 import event.ShapeListener;
 import geometry.Point3D;
 import geometry.RotationMatrix;
+import shape.ClothingItem;
 import shape.Picture;
 
 @SuppressWarnings("serial")
@@ -62,10 +64,19 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	private Timer easingTimer;
 
 	private int shapeArrayOffset;
+	
+	private double price_min;
+	private double price_max;
+	private Shape[] active_shapes;
 
 	public JFlowPanel(Configuration config) {
 		super();
 		this.config = config;
+		this.price_max = 49.90;
+		this.price_min = 0;
+		active_shapes = config.shapes;
+		refreshActiveShapes();
+		
 		listeners = new HashSet<ShapeListener>();
 		scene = new Scene(new Point3D(0, 0, 1), new RotationMatrix(0, 0, 0),
 				new Point3D(0, 0, 1));
@@ -117,11 +128,27 @@ public class JFlowPanel extends JPanel implements MouseListener,
 			}
 		}
 	}
+	
+	private void refreshActiveShapes(){
+		ArrayList<Shape> active_objects = new ArrayList<Shape>();
+		for (Shape shape : config.shapes) {
+			ClothingItem item = (ClothingItem) shape;
+			// Simple filtering
+			if (item.price >= price_min && item.price <= price_max) {
+				active_objects.add(shape);
+			}
+		}
+		active_shapes = new Shape[active_objects.size()];
+		for(int i=0; i < active_objects.size(); i++){
+			active_shapes[i] = (Shape) active_objects.get(i);
+		}		
+	}
 	// Will need to update this in order to take into account active filter settings
 	// FIXME only works for Pictures
 	private synchronized void updateShapes() {
+		
 		double maxHeight = 0;
-		for (Shape shape : config.shapes) {
+		for (Shape shape : active_shapes) {
 			if (shape instanceof Picture) {
 				Picture pic = (Picture) shape;
 				double height = config.shapeWidth * pic.getHeight()
@@ -131,10 +158,10 @@ public class JFlowPanel extends JPanel implements MouseListener,
 				}
 			}
 		}
-		for (int i = 0; i < config.shapes.length; i++) {
-			if (config.shapes[i] instanceof Picture) {
-				Picture pic = (Picture) config.shapes[i];
-				double j = transpose(i) - config.shapes.length / 2
+		for (int i = 0; i < active_shapes.length; i++) {
+			if (active_shapes[i] instanceof Picture) {
+				Picture pic = (Picture) active_shapes[i];
+				double j = transpose(i) - active_shapes.length / 2
 						+ scrollDelta;
 				j = (j < 0 ? -1 : 1)
 						* Math.pow(Math.abs(j), config.scrollScale);
@@ -199,23 +226,22 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	public synchronized void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// respect stacking order
-		for (int i = 0; i < config.shapes.length / 2; i++) {
-			paintShape(config.shapes[untranspose(i)], g);
-			paintShape(
-					config.shapes[untranspose(config.shapes.length - 1 - i)], g);
+		for (int i = 0; i < active_shapes.length / 2; i++) {
+			paintShape(active_shapes[untranspose(i)], g);
+			paintShape(active_shapes[untranspose(active_shapes.length - 1 - i)], g);
 		}
-		paintShape(config.shapes[untranspose(config.shapes.length / 2)], g);
+		paintShape(active_shapes[untranspose(active_shapes.length / 2)], g);
 	}
 
 	// physical (array) to logical (visual)
 	private int transpose(int index) {
-		return (index + shapeArrayOffset) % config.shapes.length;
+		return (index + shapeArrayOffset) % active_shapes.length;
 	}
 
 	// logical to physical
 	private int untranspose(int index) {
-		return (index - shapeArrayOffset + config.shapes.length)
-				% config.shapes.length;
+		return (shapeArrayOffset + index)
+				% active_shapes.length;
 	}
 
 	private void paintShape(Shape shape, Graphics g) {
@@ -326,9 +352,9 @@ public class JFlowPanel extends JPanel implements MouseListener,
 				if (mp != null) {
 					Point3D p = new Point3D(mp.getX(), mp.getY(), 0);
 					int i = 0;
-					while (i < config.shapes.length && newActiveShape == null) {
-						if (config.shapes[i].contains(p)) {
-							newActiveShape = config.shapes[i];
+					while (i < active_shapes.length && newActiveShape == null) {
+						if (active_shapes[i].contains(p)) {
+							newActiveShape = active_shapes[i];
 						}
 						i++;
 					}

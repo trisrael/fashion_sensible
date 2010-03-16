@@ -27,7 +27,7 @@ public class Configuration {
 
 	public Shape[] shapes;
 
-	public double shapeWidth = 1.0 / 3;
+	public double shapeWidth = 1.0 / 3.0;
 
 	public VerticalAlignment verticalShapeAlignment = VerticalAlignment.BOTTOM;
 
@@ -47,9 +47,9 @@ public class Configuration {
 
 	public boolean enableShapeSelection = true;
 
-	public boolean enableAlphaTransparency = false;
+	public boolean enableAlphaTransparency = true	;
 
-	public int framesPerSecond = 25;
+	public int framesPerSecond = 60;
 
 	public double reflectionOpacity = 1.0 / 4;
 
@@ -57,7 +57,7 @@ public class Configuration {
 
 	public boolean darkenBorder = true;
 
-	public double zoomScale = 2;
+	public double zoomScale = 10;
 
 	public double zoomFactor = 0.02;
 
@@ -67,5 +67,5 @@ public class Configuration {
 
 	public Color backgroundColor = Color.black;
 
-	public Color activeShapeBorderColor = Color.yellow;
+	public Color activeShapeBorderColor = Color.blue;
 }
