@@ -117,7 +117,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 			}
 		}
 	}
-
+	// Will need to update this in order to take into account active filter settings
 	// FIXME only works for Pictures
 	private synchronized void updateShapes() {
 		double maxHeight = 0;

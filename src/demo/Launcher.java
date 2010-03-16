@@ -59,6 +59,7 @@ public class Launcher implements Runnable {
 			}
 		});
 		JFrame frame = new JFrame("JFlow");
+		
 		frame.getContentPane().add(panel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
