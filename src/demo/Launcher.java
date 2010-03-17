@@ -38,7 +38,8 @@ public class Launcher implements Runnable {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 		}
-		final JFlowPanel panel = new JFlowPanel(new Configuration());
+		
+		final JFlowPanel panel = new JFlowPanel(new FemaleConfig());
 		panel.setPreferredSize(new Dimension(800, 300));
 		panel.addListener(new ShapeListener() {
 			public void shapeClicked(ShapeEvent e) {
@@ -58,8 +59,7 @@ public class Launcher implements Runnable {
 			public void shapeDeactivated(ShapeEvent e) {
 			}
 		});
-		JFrame frame = new JFrame("JFlow");
-		
+		JFrame frame = new JFrame("JFlow");		
 		frame.getContentPane().add(panel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);

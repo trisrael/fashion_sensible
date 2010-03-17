@@ -68,14 +68,15 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	private double price_min;
 	private double price_max;
 	private Shape[] active_shapes;
+	private HashSet<String> filter_colors= new HashSet<String>();
+	private HashSet<String> filter_sizes= new HashSet<String>();
 
 	public JFlowPanel(Configuration config) {
 		super();
 		this.config = config;
-		this.price_max = 49.90;
+		this.price_max = 200;
 		this.price_min = 0;
 		active_shapes = config.shapes;
-		refreshActiveShapes();
 		
 		listeners = new HashSet<ShapeListener>();
 		scene = new Scene(new Point3D(0, 0, 1), new RotationMatrix(0, 0, 0),
@@ -129,12 +130,101 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		}
 	}
 	
+	
+	public void resetSizes(){
+		filter_sizes.clear();
+		refreshActiveShapes();
+	}
+	
+	public void resetPrice(){
+		price_min = 0;
+		price_max = 2000;
+		refreshActiveShapes();
+	}
+	
+	public void resetColors(){
+		filter_colors.clear();
+	}
+	
+	public void resetAll(){
+		filter_sizes.clear();
+		filter_colors.clear();
+		price_min = 0;
+		price_max = 2000;
+		refreshActiveShapes();
+	}
+	
+	
+	public void setPriceRange(double min, double max){
+		price_min = min;
+		price_max = max;
+		refreshActiveShapes();
+	}
+	
+	public void removeFilterSize(String size){
+		filter_sizes.remove(size);
+		refreshActiveShapes();
+	}
+	
+	public void addFilterSize(String size){
+		filter_sizes.add(size);
+		refreshActiveShapes();
+	}
+	public void removeFilterColor(String color){
+		filter_colors.remove(color);
+		refreshActiveShapes();
+	}
+	
+	public void addFilterColor(String color){
+		filter_colors.add(color);
+		refreshActiveShapes();
+	}
+	
 	private void refreshActiveShapes(){
 		ArrayList<Shape> active_objects = new ArrayList<Shape>();
+		
+		//Set level of constraint for filtering
+		int NUMBER_OF_FILTERS = 0;
+		if(!filter_sizes.isEmpty() && !filter_colors.isEmpty()){
+			NUMBER_OF_FILTERS = 3;
+		}
+		else if(!filter_sizes.isEmpty() || !filter_colors.isEmpty()){
+			NUMBER_OF_FILTERS = 2;
+		}
+		else{
+			NUMBER_OF_FILTERS = 1;
+		}
+		
 		for (Shape shape : config.shapes) {
 			ClothingItem item = (ClothingItem) shape;
 			// Simple filtering
+			int j = 0;
+			//Check within price range
 			if (item.price >= price_min && item.price <= price_max) {
+				j++;
+			}
+			//Check has at least one of the colors
+			if (!filter_colors.isEmpty()) {
+				Object[] colors = filter_colors.toArray();
+				for (int i = 0; i < colors.length; i++) {
+					if (item.colors.contains((String) colors[i])) {
+						j++;
+						break;
+					}
+				}
+			}
+			
+			if (!filter_sizes.isEmpty()) {
+				Object[] sizes = filter_sizes.toArray();
+				for (int i = 0; i < filter_sizes.size(); i++) {
+					if (item.sizes.contains((String) sizes[i])) {
+						j++;
+						break;
+					}
+				}
+			}
+			
+			if(j >= NUMBER_OF_FILTERS){
 				active_objects.add(shape);
 			}
 		}
@@ -142,6 +232,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		for(int i=0; i < active_objects.size(); i++){
 			active_shapes[i] = (Shape) active_objects.get(i);
 		}		
+		updateShapes();
 	}
 	// Will need to update this in order to take into account active filter settings
 	// FIXME only works for Pictures
@@ -224,6 +315,8 @@ public class JFlowPanel extends JPanel implements MouseListener,
 
 	@Override
 	public synchronized void paintComponent(Graphics g) {
+		//TODO Blow up HERE
+		if(active_shapes.length == 0) {} 
 		super.paintComponent(g);
 		// respect stacking order
 		for (int i = 0; i < active_shapes.length / 2; i++) {
@@ -270,15 +363,15 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		}
 	}
 
-	@Override
+
 	public void mouseEntered(MouseEvent e) {
 	}
 
-	@Override
+
 	public void mouseExited(MouseEvent e) {
 	}
 
-	@Override
+
 	public void mousePressed(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			buttonOnePressed = true;
@@ -305,7 +398,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (buttonOnePressed) {
+		if (buttonOnePressed && active_shapes.length > 3) {
 			dragging = true;
 			setActiveShape(null);
 			updateCursor();

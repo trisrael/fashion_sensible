@@ -21,6 +21,7 @@ package main.jflow;
 import java.awt.Color;
 
 public class Configuration {
+
 	public enum VerticalAlignment {
 		TOP, MIDDLE, BOTTOM
 	}
@@ -31,7 +32,7 @@ public class Configuration {
 
 	public VerticalAlignment verticalShapeAlignment = VerticalAlignment.BOTTOM;
 
-	public double shapeRotation = Math.PI / 6;
+	public double shapeRotation = Math.PI / 8;
 
 	public double shapeSpacing = 1.0 / 3;
 
@@ -49,13 +50,13 @@ public class Configuration {
 
 	public boolean enableAlphaTransparency = true	;
 
-	public int framesPerSecond = 60;
+	public int framesPerSecond = 80;
 
 	public double reflectionOpacity = 1.0 / 4;
 
 	public double darkeningFactor = 3;
 
-	public boolean darkenBorder = true;
+	public boolean darkenBorder = false;
 
 	public double zoomScale = 10;
 
@@ -63,9 +64,9 @@ public class Configuration {
 
 	public int pictureReflectionOverlap = 2;
 
-	public int activeShapeBorderWidth = 3;
+	public int activeShapeBorderWidth = 1;
 
-	public Color backgroundColor = Color.black;
+	public Color backgroundColor = Color.white;
 
-	public Color activeShapeBorderColor = Color.blue;
+	public Color activeShapeBorderColor = Color.LIGHT_GRAY;
 }

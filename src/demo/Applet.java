@@ -41,7 +41,7 @@ public class Applet extends JApplet {
 								.getSystemLookAndFeelClassName());
 					} catch (Exception e) {
 					}
-					final JFlowPanel panel = new JFlowPanel(new Configuration());
+					final JFlowPanel panel = new JFlowPanel(new FemaleConfig());
 					panel.addListener(new ShapeListener() {
 						public void shapeClicked(ShapeEvent e) {
 							MouseEvent me = e.getMouseEvent();
