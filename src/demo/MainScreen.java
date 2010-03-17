@@ -26,9 +26,12 @@ import event.ShapeListener;
  */
 public class MainScreen extends JFrame {
 	public MainScreen(){
+	    System.setProperty(
+	            "Quaqua.tabLayoutPolicy","wrap"
 
+	         );
 		try {
-			UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
