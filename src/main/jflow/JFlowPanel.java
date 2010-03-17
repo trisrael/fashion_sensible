@@ -77,7 +77,6 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		this.price_max = 200;
 		this.price_min = 0;
 		active_shapes = config.shapes;
-		
 		listeners = new HashSet<ShapeListener>();
 		scene = new Scene(new Point3D(0, 0, 1), new RotationMatrix(0, 0, 0),
 				new Point3D(0, 0, 1));
@@ -398,7 +397,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (buttonOnePressed && active_shapes.length > 3) {
+		if (buttonOnePressed) {
 			dragging = true;
 			setActiveShape(null);
 			updateCursor();

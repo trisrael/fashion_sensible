@@ -868,7 +868,7 @@ public class MainScreen extends JFrame {
 		return femaleCoverFlow;
 	}
 	
-	final JFlowPanel femaleCoverFlow = new JFlowPanel(new FemaleConfig());
+	final JFlowPanel femaleCoverFlow = new JFlowPanel(new MaleConfig());
 	
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Travis Holt

@@ -12,7 +12,7 @@ public class ClothingItem extends Picture{
 	public HashSet<String> sizes;
 	
 
-	public ClothingItem(URL url, HashSet<String> colors, HashSet<String> sizes, double price, String sex) throws IOException {
+	public ClothingItem(URL url, HashSet<String> colors, HashSet<String> sizes, double price) throws IOException {
 		super(url);
 		this.colors = colors;
 		this.sizes = sizes;
