@@ -253,6 +253,74 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f16sizes.add("L");
 				shapes[15] = new ClothingItem(getClass().getResource("images/female_peasant.jpg"), f16colors, f16sizes, 109.90, "F");
 				
+				//#17 Grey Floppy
+				HashSet<String> f17colors = new HashSet<String>();
+				f17colors.add("grey");
+				HashSet<String> f17sizes = new HashSet<String>();
+				f17sizes.add("S");
+				f17sizes.add("M");
+				f17sizes.add("XS");
+				shapes[16] = new ClothingItem(getClass().getResource("images/female_grey_floopy.jpg"), f17colors, f17sizes, 89.90, "F");
+				
+				//#18 Multicolored
+				HashSet<String> f18colors = new HashSet<String>();
+				f18colors.add("purple");
+				f18colors.add("yellow");
+				f18colors.add("green");
+				HashSet<String> f18sizes = new HashSet<String>();
+				f18sizes.add("S");
+				f18sizes.add("M");
+				f18sizes.add("XS");
+				shapes[17] = new ClothingItem(getClass().getResource("images/female_multicolored.jpg"), f18colors, f18sizes, 89.90, "F");
+				
+				//#19 Sexy Offwhite
+				HashSet<String> f19colors = new HashSet<String>();
+				f19colors.add("grey");
+				f19colors.add("white");
+				HashSet<String> f19sizes = new HashSet<String>();
+				f19sizes.add("S");
+				f19sizes.add("L");
+				f19sizes.add("XS");
+				shapes[19] = new ClothingItem(getClass().getResource("images/female_sexy_offwhite.jpg"), f19colors, f19sizes, 54.90, "F");
+				
+				//#19 Leggings Black
+				HashSet<String> f20colors = new HashSet<String>();
+				f20colors.add("black");
+				HashSet<String> f20sizes = new HashSet<String>();
+				f20sizes.add("M");
+				f20sizes.add("S");
+				f20sizes.add("XS");
+				shapes[19] = new ClothingItem(getClass().getResource("images/female_leggings_black.jpg"), f20colors, f20sizes, 54.90, "F");
+				
+				//#20 Swanky Blue
+				HashSet<String> f21colors = new HashSet<String>();
+				f21colors.add("black");
+				HashSet<String> f21sizes = new HashSet<String>();
+				f21sizes.add("M");
+				f21sizes.add("S");
+				f21sizes.add("XS");
+				shapes[19] = new ClothingItem(getClass().getResource("images/female_leggings_black.jpg"), f21colors, f21sizes, 54.90, "F");
+				
+				//#21 Flowered red and blue  
+				HashSet<String> f22colors = new HashSet<String>();
+				f22colors.add("red");
+				f22colors.add("pink");
+				f22colors.add("");
+				HashSet<String> f22sizes = new HashSet<String>();
+				f22sizes.add("M");
+				f22sizes.add("S");
+				f22sizes.add("XS");
+				shapes[19] = new ClothingItem(getClass().getResource("images/female_leggings_black.jpg"), f22colors, f22sizes, 54.90, "F");
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			} catch (IOException e) {
 		
 		}
