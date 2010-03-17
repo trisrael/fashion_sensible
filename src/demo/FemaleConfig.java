@@ -30,7 +30,7 @@ import shape.Picture;
 public class FemaleConfig extends main.jflow.Configuration {
 	public FemaleConfig() {
 
-		shapes = new Shape[21];
+		shapes = new Shape[28];
 			try {
 				/**
 				 * Female Shirts
@@ -38,7 +38,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				
 				//#1 Blue white Shirt
 				HashSet<String> f1colors = new HashSet<String>();
-				f1colors.add("blue");
+				f1colors.add("dark blue");
 				f1colors.add("white");
 				
 				HashSet<String> f1sizes = new HashSet<String>();
@@ -48,7 +48,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f1sizes.add("XL" );
 				
 				shapes[0] = new ClothingItem(getClass().getResource(
-				"images/female_blue_white.jpg"), f1colors, f1sizes, 79.90, "F" );
+				"female_images/female_blue_white.jpg"), f1colors, f1sizes, 79.90, "F" );
 				
 				
 				//#2 Classy blue
@@ -60,7 +60,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f2sizes.add("M" );
 				
 				shapes[1] = new ClothingItem(getClass().getResource(
-				"images/female_classy_blue.jpg"), f2colors, f2sizes, 59.90, "F");
+				"female_images/female_classy_blue.jpg"), f2colors, f2sizes, 59.90, "F");
 				
 				//#3 Classy grey
 				HashSet<String> f3colors = new HashSet<String>();
@@ -73,7 +73,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f3sizes.add("XS" );
 				
 				shapes[2] = new ClothingItem(getClass().getResource(
-				"images/female_classy_grey.jpg"), f3colors, f3sizes, 89.90, "F");
+				"female_images/female_classy_grey.jpg"), f3colors, f3sizes, 89.90, "F");
 				
 				//#4 Satin Pink
 				HashSet<String> f4colors = new HashSet<String>();
@@ -85,7 +85,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f4sizes.add("XS" );
 				
 				shapes[3] = new ClothingItem(getClass().getResource(
-				"images/female_satin_pink.jpg"), f4colors, f4sizes, 59.90, "F");
+				"female_images/female_satin_pink.jpg"), f4colors, f4sizes, 59.90, "F");
 				
 				//#5  Striped
 				HashSet<String> f5colors = new HashSet<String>();
@@ -98,7 +98,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f5sizes.add("L" );
 				
 				shapes[4] = new ClothingItem(getClass().getResource(
-				"images/female_striped.jpg"), f5colors, f5sizes, 59.90, "F");
+				"female_images/female_striped.jpg"), f5colors, f5sizes, 59.90, "F");
 				
 				//#6 Formal Black
 				HashSet<String> f6colors = new HashSet<String>();
@@ -110,7 +110,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f6sizes.add("XS" );
 				
 				shapes[5] = new ClothingItem(getClass().getResource(
-				"images/female_classy_black.jpg"), f6colors, f6sizes, 79.90, "F");
+				"female_images/female_classy_black.jpg"), f6colors, f6sizes, 79.90, "F");
 				
 				//#7 Simple grey and blue
 				
@@ -124,7 +124,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f7sizes.add("XS" );
 				
 				shapes[6] = new ClothingItem(getClass().getResource(
-				"images/female_simple_offwhite_blue.jpg"), f7colors, f7sizes, 44.90, "F");
+				"female_images/female_simple_offwhite_blue.jpg"), f7colors, f7sizes, 44.90, "F");
 				
 				//#8 Medieval
 				HashSet<String> f8colors = new HashSet<String>();
@@ -137,7 +137,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f8sizes.add("M" );
 				
 				shapes[7] = new ClothingItem(getClass().getResource(
-				"images/female_medieval.jpg"), f8colors, f8sizes, 99.90, "F");
+				"female_images/female_medieval.jpg"), f8colors, f8sizes, 99.90, "F");
 				
 				//#9 Farmer
 				HashSet<String> f9colors = new HashSet<String>();
@@ -150,7 +150,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f9sizes.add("L" );
 				
 				shapes[8] = new ClothingItem(getClass().getResource(
-				"images/female_farmer.jpg"), f9colors, f9sizes, 59.90, "F");
+				"female_images/female_farmer.jpg"), f9colors, f9sizes, 59.90, "F");
 				
 				//#10 Blue flowers 
 				
@@ -165,7 +165,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 
 				
 				shapes[9] = new ClothingItem(getClass().getResource(
-				"images/female_blue_flowers.jpg"), f10colors, f10sizes, 59.90, "F");
+				"female_images/female_blue_flowers.jpg"), f10colors, f10sizes, 45, "F");
 				
 				//#11 Casual Black
 				
@@ -178,7 +178,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 
 				
 				shapes[10] = new ClothingItem(getClass().getResource(
-				"images/female_casual_black.jpg"), f11colors, f11sizes, 129.90, "F");
+				"female_images/female_casual_black.jpg"), f11colors, f11sizes, 129.90, "F");
 				
 				//#12 School Girl 
 				
@@ -193,7 +193,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 			
 				
 				shapes[11] = new ClothingItem(getClass().getResource(
-				"images/female_school_girl.jpg"), f12colors, f12sizes, 109.90, "F");
+				"female_images/female_school_girl.jpg"), f12colors, f12sizes, 109.90, "F");
 				
 
 				//#13 Art piece
@@ -211,7 +211,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f13sizes.add("XL" );
 				
 				shapes[12] = new ClothingItem(getClass().getResource(
-				"images/female_pink_brown.jpg"), f13colors, f13sizes, 49.90, "F");
+				"female_images/female_pink_brown.jpg"), f13colors, f13sizes, 49.90, "F");
 				
 				//#14 Girl next door blue
 
@@ -225,7 +225,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f14sizes.add("XL" );
 				
 				shapes[13] = new ClothingItem(getClass().getResource(
-				"images/female_light_blue_red_string.jpg"), f14colors, f14sizes, 44.90, "F");
+				"female_images/female_light_blue_red_string.jpg"), f14colors, f14sizes, 44.90, "F");
 				
 				//#15 Aztec
 				
@@ -239,7 +239,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f15sizes.add("M" );
 				f15sizes.add("L" );
 				f15sizes.add("XL" );
-				shapes[14] = new ClothingItem(getClass().getResource("images/female_aztec.png"), f15colors, f15sizes, 59.90, "F");
+				shapes[14] = new ClothingItem(getClass().getResource("female_images/female_aztec.png"), f15colors, f15sizes, 59.90, "F");
 			
 				//#16 Peasant
 				HashSet<String> f16colors = new HashSet<String>();
@@ -251,7 +251,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f16sizes.add("S" );
 				f16sizes.add("M");
 				f16sizes.add("L");
-				shapes[15] = new ClothingItem(getClass().getResource("images/female_peasant.jpg"), f16colors, f16sizes, 109.90, "F");
+				shapes[15] = new ClothingItem(getClass().getResource("female_images/female_peasant.jpg"), f16colors, f16sizes, 109.90, "F");
 				
 				//#17 Grey Floppy
 				HashSet<String> f17colors = new HashSet<String>();
@@ -260,7 +260,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f17sizes.add("S");
 				f17sizes.add("M");
 				f17sizes.add("XS");
-				shapes[16] = new ClothingItem(getClass().getResource("images/female_grey_floopy.jpg"), f17colors, f17sizes, 89.90, "F");
+				shapes[16] = new ClothingItem(getClass().getResource("female_images/female_grey_floopy.jpg"), f17colors, f17sizes, 89.90, "F");
 				
 				//#18 Multicolored
 				HashSet<String> f18colors = new HashSet<String>();
@@ -271,7 +271,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f18sizes.add("S");
 				f18sizes.add("M");
 				f18sizes.add("XS");
-				shapes[17] = new ClothingItem(getClass().getResource("images/female_multicolored.jpg"), f18colors, f18sizes, 89.90, "F");
+				shapes[17] = new ClothingItem(getClass().getResource("female_images/female_multicolored.jpg"), f18colors, f18sizes, 81.90, "F");
 				
 				//#19 Sexy Offwhite
 				HashSet<String> f19colors = new HashSet<String>();
@@ -281,7 +281,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f19sizes.add("S");
 				f19sizes.add("L");
 				f19sizes.add("XS");
-				shapes[18] = new ClothingItem(getClass().getResource("images/female_sexy_offwhite.jpg"), f19colors, f19sizes, 54.90, "F");
+				shapes[18] = new ClothingItem(getClass().getResource("female_images/female_sexy_offwhite.jpg"), f19colors, f19sizes, 95, "F");
 				
 				//#20 Leggings Black
 				HashSet<String> f20colors = new HashSet<String>();
@@ -290,37 +290,90 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f20sizes.add("M");
 				f20sizes.add("S");
 				f20sizes.add("XS");
-				shapes[19] = new ClothingItem(getClass().getResource("images/female_leggings_black.jpg"), f20colors, f20sizes, 54.90, "F");
+				shapes[19] = new ClothingItem(getClass().getResource("female_images/female_leggings_black.jpg"), f20colors, f20sizes, 120, "F");
 				
-				//#20 Swanky Blue
+				//#21 Swanky Blue
 				HashSet<String> f21colors = new HashSet<String>();
-				f21colors.add("black");
+				f21colors.add("dark blue");
 				HashSet<String> f21sizes = new HashSet<String>();
 				f21sizes.add("M");
 				f21sizes.add("S");
-				f21sizes.add("XS");
-				shapes[20] = new ClothingItem(getClass().getResource("images/female_leggings_black.jpg"), f21colors, f21sizes, 54.90, "F");
+				shapes[20] = new ClothingItem(getClass().getResource("female_images/female_swanky_blue.jpg"), f21colors, f21sizes, 77.44, "F");
 				
-				//#21 Flowered red and blue  
+				//#22 Flowered red and blue  
 				HashSet<String> f22colors = new HashSet<String>();
 				f22colors.add("red");
 				f22colors.add("pink");
-				f22colors.add("");
+				f22colors.add("dark blue");
 				HashSet<String> f22sizes = new HashSet<String>();
-				f22sizes.add("M");
+				f22sizes.add("L");
 				f22sizes.add("S");
 				f22sizes.add("XS");
-				shapes[21] = new ClothingItem(getClass().getResource("images/female_leggings_black.jpg"), f22colors, f22sizes, 54.90, "F");
+				shapes[21] = new ClothingItem(getClass().getResource("female_images/female_flowered_red_blue.jpg"), f22colors, f22sizes, 88.90 , "F");
+				
+				//#23 China Blue
+				
+				HashSet<String> f23colors = new HashSet<String>();
+				f23colors.add("dark blue");
+				f23colors.add("grey");
+				f23colors.add("brown");
+				HashSet<String> f23sizes = new HashSet<String>();
+				f23sizes.add("M");
+				f23sizes.add("XL");
+				f23sizes.add("XS");
+				shapes[22] = new ClothingItem(getClass().getResource("female_images/female_china_blue.jpg"), f23colors, f23sizes, 65.90, "F");
+				
+				//#24 Simple White
+				HashSet<String> f24colors = new HashSet<String>();
+				f24colors.add("white");
+				HashSet<String> f24sizes = new HashSet<String>();
+				f24sizes.add("M");
+				f24sizes.add("S");
+				f24sizes.add("XS");
+				f24sizes.add("L");
+				shapes[23] = new ClothingItem(getClass().getResource("female_images/female_simple_white.jpg"), f24colors, f24sizes, 53 , "F");
+				
+				//#25 Tube Brown
+				HashSet<String> f25colors = new HashSet<String>();
+				f25colors.add("brown");
+				f25colors.add("pink");
+				HashSet<String> f25sizes = new HashSet<String>();
+				f25sizes.add("M");
+				f25sizes.add("S");
+				f25sizes.add("L");
+				shapes[24] = new ClothingItem(getClass().getResource("female_images/female_tube_brown.jpg"), f25colors, f25sizes, 65 , "F");
 				
 				
+				//#26 Muffin
+				HashSet<String> f26colors = new HashSet<String>();
+				f26colors.add("pink");
+				f26colors.add("white");
+				HashSet<String> f26sizes = new HashSet<String>();
+				f26sizes.add("L");
+				f26sizes.add("S");
+				f26sizes.add("XS");
+				shapes[25] = new ClothingItem(getClass().getResource("female_images/female_muffin.jpg"), f26colors, f26sizes, 69 , "F");
 				
+				//#27 MultiFlowered Pink Yellow
+				HashSet<String> f27colors = new HashSet<String>();
+				f27colors.add("green");
+				f27colors.add("yellow");
+				f27colors.add("pink");
+				HashSet<String> f27sizes = new HashSet<String>();
+				f27sizes.add("S");
+				f27sizes.add("M");
+				f27sizes.add("XS");
+				f27sizes.add("XL");
+				shapes[26] = new ClothingItem(getClass().getResource("female_images/female_flowered_pink.jpg"), f27colors, f27sizes, 69, "F");
 				
-				
-				
-				
-				
-				
-				
+				//#28 Roses
+				HashSet<String> f28colors = new HashSet<String>();
+				f28colors.add("pink");
+				f28colors.add("white");
+				HashSet<String> f28sizes = new HashSet<String>();
+				f28sizes.add("S");
+				f28sizes.add("L");
+				shapes[27] = new ClothingItem(getClass().getResource("female_images/female_roses.jpg"), f28colors, f28sizes, 42, "F");				
 			} catch (IOException e) {
 		
 		}

@@ -4,6 +4,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import shape.Picture;
+
 import main.jflow.JFlowPanel;
 
 import com.jgoodies.*;
@@ -845,8 +847,9 @@ public class MainScreen extends JFrame {
 				MouseEvent me = e.getMouseEvent();
 				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
 						&& me.getClickCount() == 1) {
-					JOptionPane.showMessageDialog(femaleCoverFlow, e.getShape(), "Test",
-							JOptionPane.INFORMATION_MESSAGE);
+					System.out.println(e.getShape());
+					Picture pic = (Picture) e.getShape();
+					//TODO Add some feedback to let them know they actually clicked something
 				}
 			}
 

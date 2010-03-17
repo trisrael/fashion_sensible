@@ -68,5 +68,5 @@ public class Configuration {
 
 	public Color backgroundColor = Color.white;
 
-	public Color activeShapeBorderColor = Color.LIGHT_GRAY;
+	public Color activeShapeBorderColor = Color.orange;
 }
