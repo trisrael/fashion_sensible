@@ -826,6 +826,19 @@ public class MainScreen extends JFrame {
 		}
 		contentPane.add(Frame_ShirtFilter, cc.xywh(3, 13, 1, 6, CellConstraints.LEFT, CellConstraints.DEFAULT));
 
+		
+		setupCoverFlows(getContentPane(), cc);		
+		
+		
+		
+		
+		setSize(925, 710);
+		setLocationRelativeTo(getOwner());
+		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+	}
+	
+	//setupCoverFlows(getContentPane(), cc);
+	public void setupCoverFlows(Container container, CellConstraints cc){
 		femaleCoverFlow.setPreferredSize(new Dimension(800, 300));
 		femaleCoverFlow.addListener(new ShapeListener() {
 			public void shapeClicked(ShapeEvent e) {
@@ -845,14 +858,7 @@ public class MainScreen extends JFrame {
 			public void shapeDeactivated(ShapeEvent e) {
 			}
 		});
-		
-		
-		getContentPane().add(femaleCoverFlow, cc.xywh(3, 13, 1, 6, CellConstraints.CENTER, CellConstraints.DEFAULT));
-		
-		
-		setSize(925, 710);
-		setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		container.add(femaleCoverFlow, cc.xywh(3, 13, 1, 6, CellConstraints.CENTER, CellConstraints.DEFAULT));
 	}
 	
 	public JFlowPanel coverFlow(){
