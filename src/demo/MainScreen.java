@@ -36,9 +36,10 @@ public class MainScreen extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		initComponents();
 	}
+	
+	private boolean isMale;
 
 	private void DockButton_JacketMouseClicked(MouseEvent e) {
 		DockLabel_Jacket.setEnabled(true);
@@ -224,18 +225,25 @@ public class MainScreen extends JFrame {
 
 	private void Button_Price40_60MouseClicked(MouseEvent e) {
 		Label_PriceStatus.setText("$40-$60");
-		coverFlow().resetPrice();
-		coverFlow().setPriceRange(40, 60);
+		if (isMale) {
+			femaleCoverFlow.setVisible(false);
+			femaleCoverFlow.resetAll();
+			maleCoverFlow.setVisible(false);
+		}
 	}
 
 	private void Button_Price100_More(MouseEvent e) {
 		Label_PriceStatus.setText("Price>$100");
-		coverFlow().setPriceRange(100, 2000);
+		
 	}
 
 	private void PriceButton_ClearMouseClicked(MouseEvent e) {
 		Label_PriceStatus.setText("----------");
-		coverFlow().resetPrice();
+		if (!isMale) {
+		femaleCoverFlow.setVisible(false);
+		maleCoverFlow.resetAll();
+		maleCoverFlow.setVisible(false);
+		}
 	}
 
 
@@ -864,14 +872,63 @@ public class MainScreen extends JFrame {
 			public void shapeDeactivated(ShapeEvent e) {
 			}
 		});
+		
+		femaleCoverFlow.setPreferredSize(new Dimension(800, 300));
+		femaleCoverFlow.addListener(new ShapeListener() {
+			public void shapeClicked(ShapeEvent e) {
+				MouseEvent me = e.getMouseEvent();
+				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
+						&& me.getClickCount() == 1) {
+					System.out.println(e.getShape());
+					Picture pic = (Picture) e.getShape();
+					//TODO Add some feedback to let them know they actually clicked something
+				}
+			}
+
+			@Override
+			public void shapeActivated(ShapeEvent e) {
+			}
+
+			@Override
+			public void shapeDeactivated(ShapeEvent e) {
+			}
+		});
+		
+		maleCoverFlow.setPreferredSize(new Dimension(800, 300));
+		maleCoverFlow.addListener(new ShapeListener() {
+			public void shapeClicked(ShapeEvent e) {
+				MouseEvent me = e.getMouseEvent();
+				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
+						&& me.getClickCount() == 1) {
+					System.out.println(e.getShape());
+					Picture pic = (Picture) e.getShape();
+					//TODO Add some feedback to let them know they actually clicked something
+				}
+			}
+
+			@Override
+			public void shapeActivated(ShapeEvent e) {
+			}
+
+			@Override
+			public void shapeDeactivated(ShapeEvent e) {
+			}
+		});
+		isMale = true;
 		container.add(femaleCoverFlow, cc.xywh(3, 13, 1, 6, CellConstraints.CENTER, CellConstraints.DEFAULT));
+		container.add(maleCoverFlow, cc.xywh(3, 13, 1, 6, CellConstraints.CENTER, CellConstraints.DEFAULT));
 	}
 	
 	public JFlowPanel coverFlow(){
+		if(isMale){
+		return maleCoverFlow;	
+		}		
 		return femaleCoverFlow;
 	}
 	
-	final JFlowPanel femaleCoverFlow = new JFlowPanel(new MaleConfig());
+	
+	final JFlowPanel femaleCoverFlow = new JFlowPanel(new FemaleConfig());
+	final JFlowPanel maleCoverFlow = new JFlowPanel(new MaleConfig());
 	
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Travis Holt

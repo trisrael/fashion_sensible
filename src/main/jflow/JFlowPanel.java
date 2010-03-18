@@ -70,9 +70,11 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	private Shape[] active_shapes;
 	private HashSet<String> filter_colors= new HashSet<String>();
 	private HashSet<String> filter_sizes= new HashSet<String>();
+	private int routeCounter;
 
 	public JFlowPanel(Configuration config) {
 		super();
+		this.routeCounter = 0;
 		this.config = config;
 		this.price_max = 200;
 		this.price_min = 0;
@@ -93,6 +95,10 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		}
 		addMouseListener(this);
 		addMouseMotionListener(this);
+	}
+	
+	public void resetRouteCounter(){
+		routeCounter = 0;
 	}
 
 	public void addListener(ShapeListener listener) {
@@ -129,54 +135,69 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		}
 	}
 	
-	
+	// Reset Filter options
 	public void resetSizes(){
 		filter_sizes.clear();
 		refreshActiveShapes();
+		routeCounter++;
 	}
+	
+	// Each of the following increments the RouteCounter
 	
 	public void resetPrice(){
 		price_min = 0;
 		price_max = 2000;
 		refreshActiveShapes();
+		routeCounter++;
 	}
 	
 	public void resetColors(){
 		filter_colors.clear();
+		routeCounter++;
 	}
 	
+	
+	// Resets all filters; prints out RouteCounter and resets it as well
 	public void resetAll(){
 		filter_sizes.clear();
 		filter_colors.clear();
 		price_min = 0;
 		price_max = 2000;
 		refreshActiveShapes();
+		System.out.println(routeCounter);
+		routeCounter = 0;
 	}
-	
+	//Filter Setters ; Each of these also increments the count
 	
 	public void setPriceRange(double min, double max){
 		price_min = min;
 		price_max = max;
 		refreshActiveShapes();
+		routeCounter++;
 	}
 	
 	public void removeFilterSize(String size){
 		filter_sizes.remove(size);
 		refreshActiveShapes();
+		routeCounter++;
 	}
-	
+	// XL L S M XS
 	public void addFilterSize(String size){
 		filter_sizes.add(size);
 		refreshActiveShapes();
+		routeCounter++;
 	}
+	
 	public void removeFilterColor(String color){
 		filter_colors.remove(color);
 		refreshActiveShapes();
+		routeCounter++;
 	}
 	
 	public void addFilterColor(String color){
 		filter_colors.add(color);
 		refreshActiveShapes();
+		routeCounter++;
 	}
 	
 	private void refreshActiveShapes(){
@@ -233,7 +254,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		}		
 		updateShapes();
 	}
-	// Will need to update this in order to take into account active filter settings
+	
 	// FIXME only works for Pictures
 	private synchronized void updateShapes() {
 		
@@ -394,7 +415,8 @@ public class JFlowPanel extends JPanel implements MouseListener,
 			}
 		}
 	}
-
+	
+	//Increments Route
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (buttonOnePressed) {
@@ -406,6 +428,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 			setScrollRate(getScrollRate()
 					+ (config.inverseScrolling ? dragRate : -dragRate));
 			dragStart = dragEnd;
+			routeCounter++;
 		}
 	}
 
