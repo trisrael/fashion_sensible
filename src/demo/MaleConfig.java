@@ -216,7 +216,7 @@ public class MaleConfig extends Configuration {
 			
 			//15 Green Blazer
 			HashSet<String> f15c = new HashSet<String>();
-			f15c.add("red");
+			f15c.add("green");
 			
 			HashSet<String> f15s = new HashSet<String>();
 			f15s.add("M" );

@@ -137,7 +137,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f8sizes.add("M" );
 				
 				shapes[7] = new ClothingItem(getClass().getResource(
-				"female_images/female_medieval.jpg"), f8colors, f8sizes, 99.90 );
+				"female_images/female_medieval.jpg"), f8colors, f8sizes, 98);
 				
 				//#9 Farmer
 				HashSet<String> f9colors = new HashSet<String>();

@@ -4,8 +4,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="src/looks-2.3.1.jar"/>
 	<classpathentry kind="lib" path="src/forms.jar"/>
-	<classpathentry kind="lib" path="/Users/trisrael/Pictures/FashionSensible/MaleFashionSensible/Quaqua/dist/quaqua.jar"/>
 	<classpathentry kind="lib" path="src/libquaqua.jnilib"/>
 	<classpathentry kind="lib" path="src/libquaqua64.jnilib"/>
+	<classpathentry kind="lib" path="colorchooser.jar"/>
+	<classpathentry kind="lib" path="colorpicker.jar"/>
+	<classpathentry kind="lib" path="jide-oss-2.8.4.jar"/>
+	<classpathentry kind="lib" path="looks-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

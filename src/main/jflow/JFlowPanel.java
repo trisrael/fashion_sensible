@@ -96,10 +96,6 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		addMouseListener(this);
 		addMouseMotionListener(this);
 	}
-	
-	public void resetRouteCounter(){
-		routeCounter = 0;
-	}
 
 	public void addListener(ShapeListener listener) {
 		listeners.add(listener);
@@ -136,27 +132,27 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	}
 	
 	// Reset Filter options
-	public void resetSizes(){
+	public void resetSizes(boolean inc){
 		filter_sizes.clear();
 		refreshActiveShapes();
-		routeCounter++;
+		if(inc){routeCounter++;}
 	}
 	
 	// Each of the following increments the RouteCounter
 	
-	public void resetPrice(){
+	public void resetPrice(boolean inc){
 		price_min = 0;
 		price_max = 2000;
 		refreshActiveShapes();
-		routeCounter++;
+		if(inc){routeCounter++;}
 	}
 	
-	public void resetColors(){
+	public void resetColors(boolean inc){
 		filter_colors.clear();
-		routeCounter++;
+		refreshActiveShapes();
+		if(inc){routeCounter++;}
 	}
-	
-	
+
 	// Resets all filters; prints out RouteCounter and resets it as well
 	public void resetAll(){
 		filter_sizes.clear();
@@ -164,11 +160,11 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		price_min = 0;
 		price_max = 2000;
 		refreshActiveShapes();
-		System.out.println(routeCounter);
+		System.out.println("Steps taken:" + routeCounter);
 		routeCounter = 0;
 	}
+
 	//Filter Setters ; Each of these also increments the count
-	
 	public void setPriceRange(double min, double max){
 		price_min = min;
 		price_max = max;
@@ -181,6 +177,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		refreshActiveShapes();
 		routeCounter++;
 	}
+	
 	// XL L S M XS
 	public void addFilterSize(String size){
 		filter_sizes.add(size);
@@ -197,6 +194,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	public void addFilterColor(String color){
 		filter_colors.add(color);
 		refreshActiveShapes();
+		System.out.println(color + ": " + routeCounter);
 		routeCounter++;
 	}
 	
@@ -315,7 +313,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		repaint();
 	}
 
-	private synchronized void setActiveShape(Shape shape) {
+	private synchronized void setActiveShape(Shape shape){
 		if (activeShape != shape) {
 			if (activeShape != null) {
 				ShapeEvent evt = new ShapeEvent(shape);
@@ -336,8 +334,9 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	@Override
 	public synchronized void paintComponent(Graphics g) {
 		//TODO Blow up HERE
-		if(active_shapes.length == 0) {} 
+		 
 		super.paintComponent(g);
+		if(active_shapes.length == 0) {return;}
 		// respect stacking order
 		for (int i = 0; i < active_shapes.length / 2; i++) {
 			paintShape(active_shapes[untranspose(i)], g);
@@ -353,6 +352,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 
 	// logical to physical
 	private int untranspose(int index) {
+		
 		return (shapeArrayOffset + index)
 				% active_shapes.length;
 	}
@@ -387,10 +387,8 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	public void mouseEntered(MouseEvent e) {
 	}
 
-
 	public void mouseExited(MouseEvent e) {
 	}
-
 
 	public void mousePressed(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
@@ -402,6 +400,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		buttonOnePressed = false;
+		routeCounter++;
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			dragging = false;
 			updateCursor();
@@ -416,7 +415,6 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		}
 	}
 	
-	//Increments Route
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (buttonOnePressed) {
@@ -428,7 +426,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 			setScrollRate(getScrollRate()
 					+ (config.inverseScrolling ? dragRate : -dragRate));
 			dragStart = dragEnd;
-			routeCounter++;
+			
 		}
 	}
 
