@@ -41,7 +41,7 @@ public class Picture extends Rectangle {
 	private BufferedImage image;
 
 	private Point3D[] projectedPoints;
-
+	public boolean selected = false;
 	private URL url;
 
 	public Picture(URL url) throws IOException {
@@ -51,6 +51,18 @@ public class Picture extends Rectangle {
 		projectedPoints = new Point3D[4];
 		setCoordinates(new Point3D(0, 0, 0), new Point3D(image.getWidth(),
 				image.getHeight(), 0));
+	}
+	
+	public boolean isSelected(){
+		return selected;
+	}
+	
+	public void select(){
+		selected = true;
+	}
+	
+	public void unselect(){
+		selected = false;
 	}
 
 	public int getWidth() {
@@ -137,7 +149,7 @@ public class Picture extends Rectangle {
 		if (mirror) {
 			dt = -dt;
 		}
-		int borderRgb = config.activeShapeBorderColor.getRGB();
+		int borderRgb = selected ? Color.blue.getRGB(): config.activeShapeBorderColor.getRGB();
 		for (int x = 0; x < w; x++) {
 			double d = 1.0 * x / w;
 			int xo = (int) Math.round(d * image.getWidth());
@@ -155,6 +167,7 @@ public class Picture extends Rectangle {
 				int rgb = image.getRGB(constrain(xo, 0, image.getWidth() - 1),
 						constrain(yo, 0, image.getHeight() - 1));
 				rgb = setIntensity(rgb, darkening, config);
+				
 				if (config.reflectionOpacity > 0) {
 					int ry = (int) Math.round(colY + colH + colH - (y - colY)
 							- config.pictureReflectionOverlap);
@@ -163,14 +176,17 @@ public class Picture extends Rectangle {
 					pic.setRGB(x, constrain(ry, (int) Math.round(colY + colH),
 							pic.getHeight() - 1), rrgb);
 				}
-				if (active
+				if ((active || (isSelected() && z < 0.3 && z > 0 ))
 						&& (x < config.activeShapeBorderWidth
 								|| x > w - 1 - config.activeShapeBorderWidth
 								|| y < ys + config.activeShapeBorderWidth || y > ym
 								- 1 - config.activeShapeBorderWidth)) {
-					rgb = (config.darkenBorder ? setIntensity(borderRgb,
+					rgb = (config.darkenBorder ? setIntensity(
+							borderRgb,
 							darkening, config) : borderRgb);
 				}
+				
+				
 				pic.setRGB(x, constrain((int) Math.round(y), 0, (int) Math
 						.round(colY + colH) - 1), rgb);
 			}

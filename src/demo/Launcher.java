@@ -53,6 +53,7 @@ public class Launcher implements Runnable {
 
 			@Override
 			public void shapeActivated(ShapeEvent e) {
+				
 			}
 
 			@Override

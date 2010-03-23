@@ -34,7 +34,7 @@ public class Configuration {
 
 	public double shapeRotation = Math.PI / 8;
 
-	public double shapeSpacing = 1.0 / 3;
+	public double shapeSpacing = .4;
 
 	public double scrollScale = 7.0 / 8;
 

@@ -1,6 +1,8 @@
 package demo;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -9,6 +11,7 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.xml.bind.annotation.XmlList;
 
 import shape.Picture;
 
@@ -31,6 +34,7 @@ import event.*;
  * @author Awais Iqbal
  */
 public class MainScreen extends JFrame {
+	private JButton ColorPalette_Clear;
 	public MainScreen(){
 
 		try {
@@ -64,7 +68,7 @@ public class MainScreen extends JFrame {
 	}
 
 	private void DockButton_TShirtMouseClicked(MouseEvent e) {
-		coverFlow().resetAll();
+		coverFlow().resetAll(false);
 		System.out.println("**--__Male");
 		isMale = true;
 		femaleCoverFlow.setVisible(false);
@@ -90,7 +94,7 @@ public class MainScreen extends JFrame {
 	}
 
 	private void DockButton_DressMouseClicked(MouseEvent e) {
-		coverFlow().resetAll();
+		coverFlow().resetAll(false);
 		isMale = false;
 		System.out.println("**--__Female switch");
 		femaleCoverFlow.setVisible(true);
@@ -126,14 +130,6 @@ public class MainScreen extends JFrame {
 		DockLabel_UWear.setEnabled(true);
 	}
 
-	private void DockButton_JacketMouseEntered(MouseEvent e) {
-		// TODO add your code here
-	}
-
-	private void DockButton_JacketMouseExited(MouseEvent e) {
-		// TODO add your code here
-	}
-
 	private void SizeButton_XSMouseClicked(MouseEvent e) {
 		Label_SizeStatus.setText("XS");
 		coverFlow().resetSizes(false);
@@ -164,135 +160,108 @@ public class MainScreen extends JFrame {
 		coverFlow().addFilterSize("XL");
 	}
 
-	private void SizeButton_ClearMouseClicked(MouseEvent e) {
-		Label_SizeStatus.setText("--");
-		coverFlow().resetSizes(false);
-	}
-	
-	private void Button_DarkBlueMouseClicked(MouseEvent e){
-		Label_ColorStatus.setBackground(new Color(0, 0, 132));
-		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("dark blue");
-	}
-
 	private void Button_BlackMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(0, 0, 0));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("black");
+		coverFlow().addFilterColor("black", false);
 
 	}
 
 	private void ButtonPinkButtonClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(255, 31, 229));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("pink");
+		coverFlow().addFilterColor("pink", false);
 	}
 
 	private void Button_GreyMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(198, 198, 198));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("grey");
+		coverFlow().addFilterColor("grey", false);
 	}
 
 	private void Button_BlueMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(0,0,255));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("blue");
+		coverFlow().addFilterColor("blue", false);
 	}
 
 	private void Button_GreenMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(54, 127, 31));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("green");
+		coverFlow().addFilterColor("green", false);
 	}
 
 	private void ButtonLightBlue(MouseEvent e) {
-		Label_ColorStatus.setBackground(new Color(0, 255, 255));
+		Label_ColorStatus.setBackground(new Color(111, 247, 255));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("light blue");
+		coverFlow().addFilterColor("light blue", false);
 	}
 
 	private void Button_RedMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(255, 0, 0));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("red");
+		coverFlow().addFilterColor("red", true);
 	}
 
 	private void Button_PurpleMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(94, 61, 155));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("purple");
+		coverFlow().addFilterColor("purple", true);
 	}
 
 	private void Button_YellowMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(255, 255, 0));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("yellow");
+		coverFlow().addFilterColor("yellow", true);
 	}
 
 	private void Button_WhiteMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(255, 255, 255));
 		coverFlow().resetColors(false);
-		coverFlow().addFilterColor("white");
+		coverFlow().addFilterColor("white", true);
 	}
 
 	private void ColorButton_ClearMouseClicked(MouseEvent e) {
 		Label_ColorStatus.setBackground(new Color(225, 225, 225));
-		coverFlow().resetColors(false);
+		coverFlow().resetColors(true);
 	}
 
-	private void setPrice50_74(MouseEvent e) {
-		Label_PriceStatus.setText("$50-$74");
+	private void setPrice51_75(MouseEvent e) {
+		Label_PriceStatus.setText("$51-$75");
 		coverFlow().resetPrice(false);
-		coverFlow().setPriceRange(50,74);
+		coverFlow().setPriceRange(51,75, true);
 	}
 
-	private void setPrice75_99(MouseEvent e) {
-		Label_PriceStatus.setText("$75-$99");
+	private void setPrice76_100(MouseEvent e) {
+		Label_PriceStatus.setText("$76-$100");
 		coverFlow().resetPrice(false);
-		coverFlow().setPriceRange(75, 99);
+		coverFlow().setPriceRange(76, 100, true);
 	}
 
-	private void setPrice100AndUp(MouseEvent e) {
-		Label_PriceStatus.setText("$100 And Up");
+	private void setPrice101_125(MouseEvent e) {
+		Label_PriceStatus.setText("$101-$125");
 		coverFlow().resetPrice(false);
-		coverFlow().setPriceRange(100,150);
+		coverFlow().setPriceRange(101,125, true);
 	}
 	
-	private void setPrice25_49(MouseEvent e) {
-		Label_PriceStatus.setText("$25-$49");
+	private void setPrice26_50(MouseEvent e) {
+		Label_PriceStatus.setText("$26-$50");
 		coverFlow().resetPrice(false);
-		coverFlow().setPriceRange(25,49);
+		coverFlow().setPriceRange(26,50, true);
 	}
 
 	private void PriceButton_ClearMouseClicked(MouseEvent e) {
 		Label_PriceStatus.setText("----------");
 		coverFlow().resetPrice(true);
 	}
-	int a = 1;
-	private void Button_AddPaletteMouseClicked(MouseEvent e) {
-		
-		if(a==1)
-		{
-		colorChooser3.setVisible(true);
-		colorChooser3.setEnabled(true);
-		Button_AddPalette.setText("Remove Color");
-		colorChooser3.setColor(Color.red);
-		a = 2;
-		}
-		else if (a==2)
-		{
-			colorChooser3.setVisible(false);
-			//colorChooser3.setEnabled(false);
-			Button_AddPalette.setText("Add More Colors");
-			colorChooser3.setColor(Color.red);			
-			a = 1;
-		}
-	}
+
 
 	private void rangeSlider1StateChanged(ChangeEvent e) {
-		textField2.setText( Integer.toString(rangeSlider1.getLowValue()));
-		textField3.setText( Integer.toString(rangeSlider1.getHighValue()));
+		int min = rangeSlider1.getLowValue();
+		int max = rangeSlider1.getHighValue();
+		rangeMinLabel.setText( Integer.toString(min));
+		rangeMaxLabel.setText( Integer.toString(max));
+		coverFlow().setPriceRange(min, max, false);
 	}
 
 	private void comboBox1ActionPerformed(ActionEvent e) {
@@ -319,7 +288,7 @@ public class MainScreen extends JFrame {
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Travis Holt
-		
+		watch = new StopWatch();
 		TeamTitleLabel = new JLabel();
 		FilterItemLabel = new JLabel();
 		separator1 = new JSeparator();
@@ -351,6 +320,7 @@ public class MainScreen extends JFrame {
 		splitPane2 = new JSplitPane();
 		Label_SizeStatus = new JLabel();
 		SizeButton_Clear = new JButton();
+		ColorPalette_Clear = new JButton();
 		panel6 = new JPanel();
 		SizeButton_XS = new JButton();
 		SizeButton_S = new JButton();
@@ -364,9 +334,7 @@ public class MainScreen extends JFrame {
 		ColorButton_Clear = new JButton();
 		colorPalette = new JPanel();
 		Button_Black = new JButton();
-		Button_DarkBlue = new JButton();
 		Button_Pink = new JButton();
-		Button_Grey = new JButton();
 		Button_Blue = new JButton();
 		Button_Green = new JButton();
 		ButtonLightBlue = new JButton();
@@ -380,30 +348,28 @@ public class MainScreen extends JFrame {
 		Label_PriceStatus = new JLabel();
 		PriceButton_Clear = new JButton();
 		panel8 = new JPanel();
-		bPrice25_50 = new JButton();
-		bPrice50_75 = new JButton();
-		bPrice75_100 = new JButton();
-		bPriceMore100 = new JButton();
+		bPrice26_50 = new JButton();
+		bPrice51_75 = new JButton();
+		bPrice76_100 = new JButton();
+		bprice101_125 = new JButton();
 		DesignB = new JInternalFrame();
 		label1 = new JLabel();
 		label2 = new JLabel();
-		panel3 = new JPanel();
+		sizeButtonPanel = new JPanel();
 		Toggle_XS = new JToggleButton();
 		Toggle_S = new JToggleButton();
 		Toggle_M = new JToggleButton();
 		Toggle_L = new JToggleButton();
 		Toggle_XL = new JToggleButton();
 		vSpacer4 = new JPanel(null);
-		label3 = new JLabel();
+		colorLabelPalette = new JLabel();
 		panel4 = new JPanel();
-		colorChooser2 = new ColorChooser();
-		colorChooser3 = new ColorChooser();
-		Button_AddPalette = new JButton();
+		primaryColorChooser = new ColorChooser();
 		vSpacer5 = new JPanel(null);
-		label4 = new JLabel();
-		textField2 = new JTextField();
+		priceRangeLabel = new JLabel();
+		rangeMinLabel = new JTextField();
 		rangeSlider1 = new RangeSlider();
-		textField3 = new JTextField();
+		rangeMaxLabel = new JTextField();
 		CellConstraints cc = new CellConstraints();
 
 		//======== this ========
@@ -455,46 +421,28 @@ public class MainScreen extends JFrame {
 			startTiming.setText("Start");
 			startTiming.setBackground(Color.green);
 			startTiming.addMouseListener( new MouseListener() {
-				
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				int b =1;
-				@Override
+				public void mouseReleased(MouseEvent e) {}
 				public void mousePressed(MouseEvent e){}
 				public void mouseExited(MouseEvent e){}
 				public void mouseEntered(MouseEvent e){}
 				public void mouseClicked(MouseEvent e)
 				{
-				/*	if(b==1)
-					{
-						watch.start();
-						b=2;
-					}
-					if(b==2)
-					{
-						watch.stop();
-						System.out.println("Time Taken: " + watch.getElapsedTimeSecs());
-						b=1;
-					}*/
-					
-					
 					if(!beingTimed){
-//						beingTimed = true;
-//						tempTime = new Timer();
-//						
-//						System.out.println("Task begun:");
-//						startTiming.setText("Stop");
-//						startTiming.setBackground(Color.red);
+						resetDesigns(false);
+						tasksRun++;
+						beingTimed = true;
+						watch.start();
+						System.out.println("***Task #" + tasksRun);
+						startTiming.setText("Stop");
+						startTiming.setBackground(Color.red);
 					}else{
-//						beingTimed = false;
-//						System.out.println("Task Completion Time: " + (tempTime - cal.getTime().getTime()));
-//						startTiming.setBackground(Color.green);
-//						startTiming.setText("Start");
-						}
-				}
+						beingTimed = false;
+						watch.stop();
+						resetDesigns(true);
+						System.out.println("Time Taken: " + watch.getElapsedTimeSecs() + " seconds");
+						System.out.println("***End of Task #" + tasksRun + "\n");
+						startTiming.setBackground(Color.green);
+						startTiming.setText("Start");}}
 			});
 			panel2.add(startTiming, cc.xy(1, 3));
 		}
@@ -729,6 +677,7 @@ public class MainScreen extends JFrame {
 				ColorButton_Clear.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						
 						ColorButton_ClearMouseClicked(e);
 					}
 				});
@@ -752,17 +701,6 @@ public class MainScreen extends JFrame {
 					}
 				});
 				colorPalette.add(Button_Black, cc.xy(1, 1));
-				
-				//---- Button_Grey ----
-				Button_Grey.setText(" ");
-				Button_Grey.setBackground(new Color(198, 198, 198));
-				Button_Grey.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						Button_GreyMouseClicked(e);
-					}
-				});
-				colorPalette.add(Button_Grey, cc.xy(2, 1));
 
 				//---- Button_White ----
 				Button_White.setText(" ");
@@ -784,7 +722,7 @@ public class MainScreen extends JFrame {
 						Button_RedMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Red, cc.xy(2, 2));
+				colorPalette.add(Button_Red, cc.xy(2, 1));
 
 				//---- Button_Pink ----
 				Button_Pink.setText(" ");
@@ -795,7 +733,7 @@ public class MainScreen extends JFrame {
 						ButtonPinkButtonClicked(e);
 					}
 				});
-				colorPalette.add(Button_Pink, cc.xy(3, 1));
+				colorPalette.add(Button_Pink, cc.xy(2, 2));
 				
 				//---- Button_Purple ----
 				Button_Purple.setText(" ");
@@ -806,7 +744,7 @@ public class MainScreen extends JFrame {
 						Button_PurpleMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Purple, cc.xy(3, 2));
+				colorPalette.add(Button_Purple, cc.xy(3, 1));
 
 				//---- Button_Yellow ----
 				Button_Yellow.setText(" ");
@@ -817,7 +755,7 @@ public class MainScreen extends JFrame {
 						Button_YellowMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Yellow, cc.xy(4, 1));
+				colorPalette.add(Button_Yellow, cc.xy(3, 2));
 				
 
 				//---- Button_Green ----
@@ -829,19 +767,19 @@ public class MainScreen extends JFrame {
 						Button_GreenMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Green, cc.xy(4, 2));
+				colorPalette.add(Button_Green, cc.xy(4, 1));
 
 				
 				//---- Button Light Blue ----
 				ButtonLightBlue.setText(" ");
-				ButtonLightBlue.setBackground(new Color(207, 247, 255));
+				ButtonLightBlue.setBackground(new Color(111, 247, 255));
 				ButtonLightBlue.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						ButtonLightBlue(e);
 					}
 				});
-				colorPalette.add(ButtonLightBlue, cc.xy(5, 1));
+				colorPalette.add(ButtonLightBlue, cc.xy(4, 2));
 
 				
 				//---- Button_Blue ----
@@ -853,18 +791,7 @@ public class MainScreen extends JFrame {
 						Button_BlueMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Blue, cc.xy(5, 2));
-
-				//---- Button_DarkBlue ----
-				Button_DarkBlue.setText(" ");
-				Button_DarkBlue.setBackground(new Color(0, 0, 132));
-				Button_DarkBlue.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						Button_DarkBlueMouseClicked(e);
-					}
-				});
-				colorPalette.add(Button_DarkBlue, cc.xy(6, 1));
+				colorPalette.add(Button_Blue, cc.xy(5, 1));
 			
 			}
 			Frame_ShirtFilterContentPane.add(colorPalette, cc.xy(3, 13));
@@ -878,7 +805,8 @@ public class MainScreen extends JFrame {
 			{
 
 				//---- Label_PriceStatus ----
-				Label_PriceStatus.setText("----------");
+				
+				Label_PriceStatus.setText("------------");
 				splitPane3.setLeftComponent(Label_PriceStatus);
 
 				//---- PriceButton_Clear ----
@@ -900,44 +828,44 @@ public class MainScreen extends JFrame {
 					"3*(default, $lgap), default"));
 
 				//---- Button_Price25_49 ----
-				bPrice25_50.setText("$25-$49");
-				bPrice25_50.addMouseListener(new MouseAdapter() {
+				bPrice26_50.setText("$26-$50");
+				bPrice26_50.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setPrice25_49(e);
+						setPrice26_50(e);
 					}
 				});
-				panel8.add(bPrice25_50, cc.xy(1, 1));
+				panel8.add(bPrice26_50, cc.xy(1, 1));
 
-				//---- Button_Price50_75 ----
-				bPrice50_75.setText("$50-$74");
-				bPrice50_75.addMouseListener(new MouseAdapter() {
+				//---- Button_Price51_75 ----
+				bPrice51_75.setText("$51-$75");
+				bPrice51_75.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setPrice50_74(e);
+						setPrice51_75(e);
 					}
 				});
-				panel8.add(bPrice50_75, cc.xy(1, 3));
+				panel8.add(bPrice51_75, cc.xy(1, 3));
 
-				//---- Button_Price75_100----
-				bPrice75_100.setText("$75-$99");
-				bPrice75_100.addMouseListener(new MouseAdapter() {
+				//---- Button_Price 76-100----
+				bPrice76_100.setText("$76-$100");
+				bPrice76_100.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setPrice75_99(e);
+						setPrice76_100(e);
 					}
 				});
-				panel8.add(bPrice75_100, cc.xy(1, 5));
+				panel8.add(bPrice76_100, cc.xy(1, 5));
 
 				//---- Button_PriceMore100 ----
-				bPriceMore100.setText("More than $100");
-				bPriceMore100.addMouseListener(new MouseAdapter() {
+				bprice101_125.setText("$101-$125");
+				bprice101_125.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setPrice100AndUp(e);
+						setPrice101_125(e);
 					}
 				});
-				panel8.add(bPriceMore100, cc.xy(1, 7));
+				panel8.add(bprice101_125, cc.xy(1, 7));
 			}
 			Frame_ShirtFilterContentPane.add(panel8, cc.xy(3, 19));
 		}
@@ -959,38 +887,88 @@ public class MainScreen extends JFrame {
 			label2.setText("Size");
 			internalFrame1ContentPane.add(label2, cc.xy(3, 5));
 
-			//======== panel3 ========
+			//======== Size Toggle Panel ========
 			{
-				panel3.setLayout(new FormLayout(
+				sizeButtonPanel.setLayout(new FormLayout(
 					"16dlu, 4*([16dlu,default])",
 					"default"));
 
 				//---- Toggle_XS ----
 				Toggle_XS.setText("XS");
-				panel3.add(Toggle_XS, cc.xy(1, 1));
+				Toggle_XS.addMouseListener(new MouseListener() {
+					public void mouseReleased(MouseEvent e) {}
+					public void mousePressed(MouseEvent e) {}
+					public void mouseExited(MouseEvent e) {}
+					public void mouseEntered(MouseEvent e) {}
+					public void mouseClicked(MouseEvent e) {
+						if(Toggle_XS.getSelectedObjects() != null){
+							coverFlow().addFilterSize("XS");
+						}else{
+							coverFlow().removeFilterSize("XS");}}});
+				sizeButtonPanel.add(Toggle_XS, cc.xy(1, 1));
 
 				//---- Toggle_S ----
 				Toggle_S.setText("S");
-				panel3.add(Toggle_S, cc.xy(2, 1));
+				Toggle_S.addMouseListener(new MouseListener() {
+					public void mouseReleased(MouseEvent e) {}
+					public void mousePressed(MouseEvent e) {}
+					public void mouseExited(MouseEvent e) {}
+					public void mouseEntered(MouseEvent e) {}
+					public void mouseClicked(MouseEvent e) {
+						if(Toggle_S.getSelectedObjects() != null){
+							coverFlow().addFilterSize("S");
+						}else{
+							coverFlow().removeFilterSize("S");}}});
+				sizeButtonPanel.add(Toggle_S, cc.xy(2, 1));
 
 				//---- Toggle_M ----
 				Toggle_M.setText("M");
-				panel3.add(Toggle_M, cc.xy(3, 1));
+				Toggle_M.addMouseListener(new MouseListener() {
+					public void mouseReleased(MouseEvent e) {}
+					public void mousePressed(MouseEvent e) {}
+					public void mouseExited(MouseEvent e) {}
+					public void mouseEntered(MouseEvent e) {}
+					public void mouseClicked(MouseEvent e) {
+						if(Toggle_M.getSelectedObjects() != null){
+							coverFlow().addFilterSize("M");
+						}else{
+							coverFlow().removeFilterSize("M");}}});
+				sizeButtonPanel.add(Toggle_M, cc.xy(3, 1));
 
 				//---- Toggle_L ----
 				Toggle_L.setText("L");
-				panel3.add(Toggle_L, cc.xy(4, 1));
+				Toggle_L.addMouseListener(new MouseListener() {
+					public void mouseReleased(MouseEvent e) {}
+					public void mousePressed(MouseEvent e) {}
+					public void mouseExited(MouseEvent e) {}
+					public void mouseEntered(MouseEvent e) {}
+					public void mouseClicked(MouseEvent e) {
+						if(Toggle_L.getSelectedObjects() != null){
+							coverFlow().addFilterSize("L");
+						}else{
+							coverFlow().removeFilterSize("L");}}});
+				sizeButtonPanel.add(Toggle_L, cc.xy(4, 1));
 
 				//---- Toggle_XL ----
 				Toggle_XL.setText("XL");
-				panel3.add(Toggle_XL, cc.xy(5, 1));
+				Toggle_XL.addMouseListener(new MouseListener() {
+					public void mouseReleased(MouseEvent e) {}
+					public void mousePressed(MouseEvent e) {}
+					public void mouseExited(MouseEvent e) {}
+					public void mouseEntered(MouseEvent e) {}
+					public void mouseClicked(MouseEvent e) {
+						if(Toggle_XL.getSelectedObjects() != null){
+							coverFlow().addFilterSize("XL");
+						}else{
+							coverFlow().removeFilterSize("XL");}}});
+				sizeButtonPanel.add(Toggle_XL, cc.xy(5, 1));
 			}
-			internalFrame1ContentPane.add(panel3, cc.xy(7, 5));
+			internalFrame1ContentPane.add(sizeButtonPanel, cc.xy(7, 5));
 			internalFrame1ContentPane.add(vSpacer4, cc.xy(7, 7));
 
-			//---- label3 ----
-			label3.setText("Color Palette");
-			internalFrame1ContentPane.add(label3, cc.xy(3, 9));
+			//---- Color Label Palette ----
+			colorLabelPalette.setText("Color Palette");
+			internalFrame1ContentPane.add(colorLabelPalette, cc.xy(3, 9));
 
 			//======== panel4 ========
 			{
@@ -998,40 +976,79 @@ public class MainScreen extends JFrame {
 					"23dlu, $lcgap, default",
 					"22dlu, $lgap, default"));
 
-				//---- colorChooser2 ----
-				colorChooser2.setToolTipText("Click and hold to select a color from the rainbow palette");
-				panel4.add(colorChooser2, cc.xy(1, 1));
-
-				//---- colorChooser3 ----
-				colorChooser3.setColor(new Color(225, 225, 225));
-				colorChooser3.setEnabled(false);
-				colorChooser3.setToolTipText("Click and hold to select color from the rainbow palette");
-				panel4.add(colorChooser3, cc.xy(1, 3));
-
-				//---- Button_AddPalette ----
-				Button_AddPalette.setText("Select More Colors");
-				Button_AddPalette.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						Button_AddPaletteMouseClicked(e);
+				//---- Color Chooser #1 ----
+				primaryColorChooser.setToolTipText("Click and hold to select a color from the rainbow palette");
+				primaryColorChooser.setColor(Color.gray);
+				primaryColorChooser.addPropertyChangeListener(new PropertyChangeListener() {
+					public void propertyChange(PropertyChangeEvent evt) {
+						
+						try {
+							Color color = (Color) evt.getNewValue();
+							coverFlow().resetColors(false);
+							coverFlow().addFilterColor(colorToString(color), false);
+						} catch (Exception e) {
+						}
 					}
 				});
-				panel4.add(Button_AddPalette, cc.xy(3, 3));
+				primaryColorChooser.addMouseListener(new MouseListener() {
+					
+					@Override
+					public void mouseReleased(MouseEvent e) {
+					coverFlow().incrementRouteCounter();
+						
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				panel4.add(primaryColorChooser, cc.xy(1, 1));
+				ColorPalette_Clear.setText("Clear");
+				ColorPalette_Clear.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {
+					primaryColorChooser.setColor(Color.gray);
+					coverFlow().resetColors(true);
+					}
+				});
+				panel4.add(ColorPalette_Clear, cc.xy(3, 1));
+
 			}
 			internalFrame1ContentPane.add(panel4, cc.xywh(7, 9, 1, 1, CellConstraints.DEFAULT, CellConstraints.BOTTOM));
 			internalFrame1ContentPane.add(vSpacer5, cc.xy(7, 11));
 
 			//---- label4 ----
-			label4.setText("Price Range");
-			internalFrame1ContentPane.add(label4, cc.xy(3, 15));
+			priceRangeLabel.setText("Price Range");
+			internalFrame1ContentPane.add(priceRangeLabel, cc.xy(3, 15));
 
 			//---- textField2 ----
-			textField2.setText("25");
-			textField2.setEditable(false);
-			internalFrame1ContentPane.add(textField2, cc.xy(5, 15));
+			rangeMinLabel.setText("25");
+			rangeMinLabel.setEditable(false);
+			internalFrame1ContentPane.add(rangeMinLabel, cc.xy(5, 15));
 
 			//---- rangeSlider1 ----
-			rangeSlider1.setHighValue(75);
+			rangeSlider1.setMaximum(125);
+			rangeSlider1.setMinimum(25);
+			rangeSlider1.setHighValue(125);
 			rangeSlider1.setLowValue(25);
 			rangeSlider1.setPaintTicks(true);
 			rangeSlider1.setPaintLabels(true);
@@ -1040,12 +1057,45 @@ public class MainScreen extends JFrame {
 					rangeSlider1StateChanged(e);
 				}
 			});
+			rangeSlider1.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					coverFlow().incrementRouteCounter();
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 			internalFrame1ContentPane.add(rangeSlider1, cc.xy(7, 15));
 
-			//---- textField3 ----
-			textField3.setText("75");
-			textField3.setEditable(false);
-			internalFrame1ContentPane.add(textField3, cc.xy(9, 15));
+			//---- RangeMaxLabel ----
+			rangeMaxLabel.setText("125");
+			rangeMaxLabel.setEditable(false);
+			internalFrame1ContentPane.add(rangeMaxLabel, cc.xy(9, 15));
 		}
 		contentPane.add(DesignB, cc.xywh(3, 15, 1, 1, CellConstraints.DEFAULT, CellConstraints.TOP));
 		setSize(1475, 715);
@@ -1063,8 +1113,8 @@ public class MainScreen extends JFrame {
 				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
 						&& me.getClickCount() == 1) {
 					System.out.println(e.getShape());
-					Picture pic = (Picture) e.getShape();
 					//TODO Add some feedback to let them know they actually clicked something
+					Picture pic = (Picture) e.getShape();
 				}
 			}
 
@@ -1083,9 +1133,7 @@ public class MainScreen extends JFrame {
 				MouseEvent me = e.getMouseEvent();
 				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
 						&& me.getClickCount() == 1) {
-					System.out.println(e.getShape());
-					Picture pic = (Picture) e.getShape();
-					//TODO Add some feedback to let them know they actually clicked something
+					
 				}
 			}
 
@@ -1104,9 +1152,14 @@ public class MainScreen extends JFrame {
 				MouseEvent me = e.getMouseEvent();
 				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
 						&& me.getClickCount() == 1) {
-					System.out.println(e.getShape());
 					Picture pic = (Picture) e.getShape();
-					//TODO Add some feedback to let them know they actually clicked something
+					if(pic.isSelected()){
+						pic.unselect();
+					}else{
+						pic.select();
+						System.out.println(e.getShape());
+					}
+					coverFlow().updateShapes();
 				}
 			}
 
@@ -1132,6 +1185,78 @@ public class MainScreen extends JFrame {
 		return femaleCoverFlow;
 	}
 	
+	private void resetDesigns(boolean printRoute) {
+	if(DesignB.isVisible()){
+		Toggle_XS.setSelected(false);
+		Toggle_S.setSelected(false);
+		Toggle_M.setSelected(false);
+		Toggle_L.setSelected(false);
+		Toggle_XL.setSelected(false);
+		primaryColorChooser.setColor(Color.gray);
+		rangeSlider1.setHighValue(125);
+		rangeSlider1.setLowValue(25);
+	}else if(Frame_ShirtFilter.isVisible()){
+		SizeButton_L.setSelected(false);
+		SizeButton_M.setSelected(false);
+		SizeButton_S.setSelected(false);
+		SizeButton_XS.setSelected(false);
+		SizeButton_XL.setSelected(false);
+		Label_PriceStatus.setText("------------");
+		Label_SizeStatus.setText("---");
+		Label_ColorStatus.setBackground(new Color(225, 225, 225));
+	}
+	coverFlow().resetAll(printRoute);
+	}
+
+	private String colorToString(Color color) {
+		if(color.getRed() >= 50 && color.getRed() <= 190  && color.getGreen() >= 0 && 
+				color.getGreen() <= 66 && color.getBlue() <= 255 && color.getBlue() >= 35){
+			return "purple";
+		}
+		else if ((color.getRed() >= 82 && color.getRed() <= 255  && color.getGreen() >= 0 && 
+				color.getGreen() <= 36 && color.getBlue() <= 64 && color.getBlue() >= 10) || 
+				(color.getRed() >= 112 && color.getRed() <= 255  && color.getGreen() >= 20 && 
+						color.getGreen() <= 55 && color.getBlue() <= 20 && color.getBlue() >= 0))  {
+			return "red";
+		}
+		else if ((color.getRed() >= 0 && color.getRed() <= 51  && color.getGreen() >= 0 && 
+				color.getGreen() <= 105 && color.getBlue() <= 255 && color.getBlue() >= 52) || 
+				(color.getGreen() >= 105 && color.getGreen() <= 150 && color.getBlue() >= 106 &&  color.getBlue() <= 180
+						&& color.getRed() == 0)) {
+			return "blue";
+		}else if (color.getRed() >= 0 && color.getRed() <= 190  && color.getGreen() >= 120 && 
+				color.getGreen() <= 255 && color.getBlue() <= 255 && color.getBlue() >= 155) {
+			return "light blue";
+		}
+		else if (color.getRed() >= 0 && color.getRed() <= 190  && color.getGreen() >= 120 && 
+				color.getGreen() <= 255 && color.getBlue() <= 255 && color.getBlue() >= 155) {
+			return "light blue";
+		}
+		else if (color.getRed() >= 0 && color.getRed() <= 190  && color.getGreen() >= 120 && 
+				color.getGreen() <= 255 && color.getBlue() <= 255 && color.getBlue() >= 155) {
+			return "green";
+		}
+		else if (color.getRed() >= 194 && color.getRed() <= 255  && color.getGreen() >= 0 && 
+				color.getGreen() <= 220 && color.getBlue() <= 255 && color.getBlue() >= 65) {
+			return "pink";
+		}
+		else if (color.getRed() >= 165 && color.getRed() <= 255 && color.getGreen() >= 165 && 
+				color.getGreen() <= 255 && color.getBlue() <= 190 && color.getBlue() >= 0) {
+			return "yellow";
+		}
+		else if (color.getRed() <= 50 && color.getGreen() <= 50 && color.getBlue() <= 50) {
+			return "black";
+		}
+		else if (color.getRed() >= 230 && color.getGreen() >= 230 && color.getBlue() >= 230) {
+			return "white";
+		}
+		else if (color.getRed() >= 0 && color.getRed() < 158 && color.getGreen() > 50 && color.getBlue() >= 0) {
+			return "green";
+		}
+		else{
+			return null;
+		}
+	}
 	private boolean isMale;
 	final JFlowPanel femaleCoverFlow = new JFlowPanel(new FemaleConfig());
 	final JFlowPanel maleCoverFlow = new JFlowPanel(new MaleConfig());
@@ -1145,7 +1270,8 @@ public class MainScreen extends JFrame {
 	private JComboBox comboBox1;
 	private JTextField textField1;
 	private JButton startTiming;
-	private Timer tempTime;
+	private StopWatch watch;
+	private int tasksRun = 0;
 	private boolean beingTimed;
 	private JPanel panel1;
 	private JButton DockButton_Jacket;
@@ -1183,9 +1309,7 @@ public class MainScreen extends JFrame {
 	private JButton ColorButton_Clear;
 	private JPanel colorPalette;
 	private JButton Button_Black;
-	private JButton Button_DarkBlue;
 	private JButton Button_Pink;	
-	private JButton Button_Grey;
 	private JButton Button_Blue;
 	private JButton Button_Green;
 	private JButton ButtonLightBlue;
@@ -1199,29 +1323,27 @@ public class MainScreen extends JFrame {
 	private JLabel Label_PriceStatus;
 	private JButton PriceButton_Clear;
 	private JPanel panel8;
-	private JButton bPrice25_50;
-	private JButton bPrice50_75;
-	private JButton bPrice75_100;
-	private JButton bPriceMore100;
+	private JButton bPrice26_50;
+	private JButton bPrice51_75;
+	private JButton bPrice76_100;
+	private JButton bprice101_125;
 	private JInternalFrame DesignB;
 	private JLabel label1;
 	private JLabel label2;
-	private JPanel panel3;
+	private JPanel sizeButtonPanel;
 	private JToggleButton Toggle_XS;
 	private JToggleButton Toggle_S;
 	private JToggleButton Toggle_M;
 	private JToggleButton Toggle_L;
 	private JToggleButton Toggle_XL;
 	private JPanel vSpacer4;
-	private JLabel label3;
+	private JLabel colorLabelPalette;
 	private JPanel panel4;
-	private ColorChooser colorChooser2;
-	private ColorChooser colorChooser3;
-	private JButton Button_AddPalette;
+	private ColorChooser primaryColorChooser;
 	private JPanel vSpacer5;
-	private JLabel label4;
-	private JTextField textField2;
+	private JLabel priceRangeLabel;
+	private JTextField rangeMinLabel;
 	private RangeSlider rangeSlider1;
-	private JTextField textField3;
+	private JTextField rangeMaxLabel;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

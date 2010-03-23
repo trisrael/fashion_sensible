@@ -154,22 +154,22 @@ public class JFlowPanel extends JPanel implements MouseListener,
 	}
 
 	// Resets all filters; prints out RouteCounter and resets it as well
-	public void resetAll(){
+	public void resetAll(boolean printStatement){
 		filter_sizes.clear();
 		filter_colors.clear();
 		price_min = 0;
 		price_max = 2000;
 		refreshActiveShapes();
-		System.out.println("Steps taken:" + routeCounter);
+		if(printStatement){System.out.println("Steps taken:" + routeCounter);}
 		routeCounter = 0;
 	}
 
 	//Filter Setters ; Each of these also increments the count
-	public void setPriceRange(double min, double max){
+	public void setPriceRange(double min, double max, boolean incrementRouteCounter ){
 		price_min = min;
 		price_max = max;
 		refreshActiveShapes();
-		routeCounter++;
+		if(incrementRouteCounter){routeCounter++;}
 	}
 	
 	public void removeFilterSize(String size){
@@ -191,11 +191,12 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		routeCounter++;
 	}
 	
-	public void addFilterColor(String color){
+	public void addFilterColor(String color, boolean incrementCounter){
 		filter_colors.add(color);
 		refreshActiveShapes();
-		System.out.println(color + ": " + routeCounter);
-		routeCounter++;
+		if(incrementCounter){
+			routeCounter++;	
+		}
 	}
 	
 	private void refreshActiveShapes(){
@@ -249,12 +250,14 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		active_shapes = new Shape[active_objects.size()];
 		for(int i=0; i < active_objects.size(); i++){
 			active_shapes[i] = (Shape) active_objects.get(i);
+			Picture pic = (Picture) active_shapes[i];
+			pic.unselect();
 		}		
 		updateShapes();
 	}
 	
 	// FIXME only works for Pictures
-	private synchronized void updateShapes() {
+	public synchronized void updateShapes() {
 		
 		double maxHeight = 0;
 		for (Shape shape : active_shapes) {
@@ -313,7 +316,7 @@ public class JFlowPanel extends JPanel implements MouseListener,
 		repaint();
 	}
 
-	private synchronized void setActiveShape(Shape shape){
+	public synchronized void setActiveShape(Shape shape){
 		if (activeShape != shape) {
 			if (activeShape != null) {
 				ShapeEvent evt = new ShapeEvent(shape);
@@ -479,5 +482,9 @@ public class JFlowPanel extends JPanel implements MouseListener,
 			}
 			updateCursor();
 		}
+	}
+
+	public void incrementRouteCounter() {
+		routeCounter++;
 	}
 }
