@@ -35,6 +35,7 @@ import event.*;
  */
 public class MainScreen extends JFrame {
 	private JButton ColorPalette_Clear;
+	private JButton Button_Grey;
 	public MainScreen(){
 
 		try {
@@ -340,6 +341,7 @@ public class MainScreen extends JFrame {
 		ButtonLightBlue = new JButton();
 		Button_Red = new JButton();
 		Button_Purple = new JButton();
+		Button_Grey = new JButton();
 		Button_Yellow = new JButton();
 		Button_White = new JButton();
 		vSpacer3 = new JPanel(null);
@@ -722,7 +724,7 @@ public class MainScreen extends JFrame {
 						Button_RedMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Red, cc.xy(2, 1));
+				colorPalette.add(Button_Red, cc.xy(3, 1));
 
 				//---- Button_Pink ----
 				Button_Pink.setText(" ");
@@ -744,7 +746,7 @@ public class MainScreen extends JFrame {
 						Button_PurpleMouseClicked(e);
 					}
 				});
-				colorPalette.add(Button_Purple, cc.xy(3, 1));
+				colorPalette.add(Button_Purple, cc.xy(5, 2));
 
 				//---- Button_Yellow ----
 				Button_Yellow.setText(" ");
@@ -792,6 +794,16 @@ public class MainScreen extends JFrame {
 					}
 				});
 				colorPalette.add(Button_Blue, cc.xy(5, 1));
+				
+				Button_Grey.setText(" ");
+				Button_Grey.setBackground(new Color(198, 198, 198));
+				Button_Grey.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Button_GreyMouseClicked(e);
+					}
+				});
+				colorPalette.add(Button_Grey, cc.xy(2, 1));
 			
 			}
 			Frame_ShirtFilterContentPane.add(colorPalette, cc.xy(3, 13));
@@ -1133,7 +1145,14 @@ public class MainScreen extends JFrame {
 				MouseEvent me = e.getMouseEvent();
 				if (!me.isConsumed() && me.getButton() == MouseEvent.BUTTON1
 						&& me.getClickCount() == 1) {
-					
+					Picture pic = (Picture) e.getShape();
+					if(pic.isSelected()){
+						pic.unselect();
+					}else{
+						pic.select();
+						System.out.println(e.getShape());
+					}
+					coverFlow().updateShapes();
 				}
 			}
 
@@ -1212,6 +1231,9 @@ public class MainScreen extends JFrame {
 		if(color.getRed() >= 50 && color.getRed() <= 190  && color.getGreen() >= 0 && 
 				color.getGreen() <= 66 && color.getBlue() <= 255 && color.getBlue() >= 35){
 			return "purple";
+		}
+		else if (color.getRed() >= 25 && (color.getRed()  == color.getBlue() && color.getRed()  == color.getGreen()) ) {
+			return "grey";
 		}
 		else if ((color.getRed() >= 82 && color.getRed() <= 255  && color.getGreen() >= 0 && 
 				color.getGreen() <= 36 && color.getBlue() <= 64 && color.getBlue() >= 10) || 

@@ -97,10 +97,10 @@ public class MaleConfig extends Configuration {
 			f6colors.add("white");
 			
 			HashSet<String> f6sizes = new HashSet<String>();
-			f6sizes.add("L" );
-			f6sizes.add("XL" );
-			f6sizes.add("M" );
-			f6sizes.add("S" );
+			f6sizes.add("L");
+			f6sizes.add("XL");
+			f6sizes.add("M");
+			f6sizes.add("S");
 			
 			shapes[5] = new ClothingItem(getClass().getResource(
 			"male_images/classic_white.jpg"), f6colors, f6sizes, 39);

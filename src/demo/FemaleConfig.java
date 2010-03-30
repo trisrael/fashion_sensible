@@ -38,8 +38,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				
 				//#1 Blue white Shirt
 				HashSet<String> f1colors = new HashSet<String>();
-				f1colors.add("dark blue");
-				f1colors.add("white");
+				f1colors.add("blue");
 				
 				HashSet<String> f1sizes = new HashSet<String>();
 				f1sizes.add("S" );
@@ -246,6 +245,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				f16colors.add("purple" );
 				f16colors.add("pink" );
 				f16colors.add("grey" );
+				f16colors.add("white" );
 				
 				HashSet<String> f16sizes = new HashSet<String>();
 				f16sizes.add("S" );
@@ -256,6 +256,7 @@ public class FemaleConfig extends main.jflow.Configuration {
 				//#17 Grey Floppy
 				HashSet<String> f17colors = new HashSet<String>();
 				f17colors.add("grey");
+				f17colors.add("white");
 				HashSet<String> f17sizes = new HashSet<String>();
 				f17sizes.add("S");
 				f17sizes.add("M");
